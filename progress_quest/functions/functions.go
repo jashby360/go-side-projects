@@ -3,30 +3,12 @@ package functions
 import (
 	"fmt"
 	"math/rand"
+	s "progress_quest/structures"
 	"time"
 )
 
-// Character Struct
-type Character struct {
-	Name  string
-	Level int
-	Class string
-	HP    int
-	// Other stats
-	EXP int
-}
-
-// Quest Struct
-type Quest struct {
-	Description string
-	Reward      int
-	Completed   bool
-	// Other Quest Information
-	Difficulty int
-}
-
-func CreateCharacter(name string, class string) *Character {
-	return &Character{
+func CreateCharacter(name string, class string) *s.Character {
+	return &s.Character{
 		Name:  name,
 		Level: 1,
 		Class: class,
@@ -36,7 +18,7 @@ func CreateCharacter(name string, class string) *Character {
 }
 
 // Function
-func GenerateQuest() *Quest {
+func GenerateQuest() *s.Quest {
 	quests := []string{"Fetch", "Placate", "Deliver"}
 	// items := []string{"Shiny Stone", "Rare Flower", "Ancient Artifact"}
 	// rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -76,7 +58,7 @@ func GenerateQuest() *Quest {
 
 	randomIndex := rand.Intn(len(myMap[randomDifficulty][randomElement]))
 
-	return &Quest{
+	return &s.Quest{
 		Description: fmt.Sprintf("%s %s", randomElement, myMap[randomDifficulty][randomElement][randomIndex]),
 		Reward:      rand.Intn(100) + 50,
 		Completed:   false,
@@ -85,7 +67,7 @@ func GenerateQuest() *Quest {
 
 }
 
-func SimulateCombat(character *Character, quest *Quest) {
+func SimulateCombat(character *s.Character, quest *s.Quest) {
 	fmt.Printf("%s is on a quest to %s which is a level %d Quest.\n", character.Name, quest.Description, quest.Difficulty)
 	time.Sleep(time.Duration(rand.Intn(5) + 1))
 	// add a function that will calculate the difficulty of quest and return if completed
