@@ -1,0 +1,2 @@
+## REST Api Creation/Database Communication
+Go server with an Nginx proxy and a Postgress database; this is going to help me learn how to route traffic using echo, while also growing my understanding of docker and postgres.
