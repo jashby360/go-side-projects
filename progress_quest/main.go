@@ -9,7 +9,7 @@ import (
 func main() {
 	character := test.CreateCharacter("Hero", "Warrior")
 	fmt.Printf("Welcome, %s!\n", character.Name)
-	for i := 0; i < 5; i++ {
+	for !character.Dead {
 		quest := test.GenerateRandomQuest()
 		fmt.Println(character)
 		test.SimulateCombat(character, quest)
