@@ -10,7 +10,7 @@ func main() {
 	character := test.CreateCharacter("Hero", "Warrior")
 	fmt.Printf("Welcome, %s!\n", character.Name)
 	for i := 0; i < 5; i++ {
-		quest := test.GenerateQuest()
+		quest := test.GenerateRandomQuest()
 		fmt.Println(character)
 		test.SimulateCombat(character, quest)
 		fmt.Printf("%s is now level %d. \n", character.Name, character.Level)

@@ -7,7 +7,8 @@ type Character struct {
 	Class string
 	HP    int
 	// Other stats
-	EXP int
+	EXP  int
+	Dead bool
 }
 
 // Other types of Character Structures can be defined below.
