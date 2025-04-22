@@ -1,12 +1,23 @@
-{{ define "test.html" }}
+{{ define "users.html" }}
 <!DOCTYPE html>
 <html>
    <head>
+      <style>
+         tr.htmx-swapping td {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+         }
+      </style>
       <title>Go + htmx app </title>
       <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
       <script src="https://cdn.tailwindcss.com"></script>
    </head>
    <body class="text-center flex flex-col w-full gap-6 mt-10">
+      <form hx-post="/users" hx-target="#user-list" hx-swap="beforeend">
+         <input type="text" name="name" placeholder="Name" class="border border-gray-300 p-2 rounded mb-2" required>
+         <input type="email" name="email" placeholder="Email" class="border border-gray-300 p-2 rounded mb-2" required>
+         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">Add User</button> 
+      </form>
       <table id="user-list" class="w-1/2 mx-auto mt-4 border border-gray-300">
          <thead>
             <tr class="border border-gray-300">
@@ -15,13 +26,13 @@
                <th class="px-4 py-2">Actions</th>
             </tr>
          </thead>
-         <tbody>
+         <tbody hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
             {{ range .users }}
             <tr class="border border-gray-300">
                <td class="px-4 py-2">{{ .Name }}</td>
                <td class="px-4 py-2">{{ .Email }}</td>
                <td class="px-4 py-2">
-                  <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Delete</button>
+                  <button hx-delete='/users-delete/{{.Name}}' hx-swap="delete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Delete</button>
                </td>
             </tr>
             {{ end }}
