@@ -93,7 +93,7 @@ func allotEXP(character *s.Character, reward int) {
 
 func determineDeath(character *s.Character, quest *s.Quest) {
 
-	if character.FailCount > 2 {
+	if character.FailCount >= 2 {
 		character.Dead = true
 	} else {
 		character.Dead = false
